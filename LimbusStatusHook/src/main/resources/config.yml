@@ -1,0 +1,57 @@
+# LimbusStatusHook - Keyword Status Effects (Limbus Company) hiển thị trên Action Bar của OneBlockCore.
+# Sửa xong dùng: /limbusstatus reload
+#
+# Plugin đọc giá trị stat của người chơi từ MythicLib (StatMap) - đây cũng là nơi
+# MMOItems đẩy stat từ trang bị/custom-stats vào. Không cần PlaceholderAPI.
+
+action-bar:
+  # Bật/tắt toàn bộ phần status trên Action Bar.
+  enabled: true
+  # Gửi lại Action Bar mỗi bao nhiêu tick (20 tick = 1 giây). OneBlockCore gốc là 20.
+  update-ticks: 10
+  # Ngăn cách giữa phần MÁU/GIÁP của OneBlockCore và phần status, cũng như giữa các status.
+  separator: " &7| "
+  # true = chỉ hiện status mà người chơi đang có (giá trị khác 0).
+  hide-zero: true
+  # Định dạng mặc định. Biến: {color} {name} {value}
+  default-format: "{color}{name} {value}"
+
+# Danh sách Keyword Status Effects theo thứ tự hiển thị.
+#   name   : tên hiển thị
+#   color  : mã màu (&a, hoặc hex &#RRGGBB)
+#   stats  : danh sách ID stat trong MythicLib/MMOItems, thử lần lượt, lấy ID đầu tiên có giá trị khác 0.
+#            Sửa cho khớp ID bạn đã tạo (vd CUSTOM_BURN trong MMOItems custom-stats.yml).
+#            Dùng /limbusstatus stats để xem ID stat thật của người chơi.
+#   format : (tuỳ chọn) ghi đè default-format cho riêng status này.
+#   enabled: (tuỳ chọn) false = không hiện status này.
+status-effects:
+  burn:
+    name: "Burn"
+    color: "&#F97316"
+    stats: [BURN, CUSTOM_BURN, LIMBUS_BURN]
+  bleed:
+    name: "Bleed"
+    color: "&#DC2626"
+    stats: [BLEED, CUSTOM_BLEED, LIMBUS_BLEED]
+  tremor:
+    name: "Tremor"
+    color: "&#EAB308"
+    stats: [TREMOR, CUSTOM_TREMOR, LIMBUS_TREMOR]
+  rupture:
+    name: "Rupture"
+    color: "&#3B82F6"
+    stats: [RUPTURE, CUSTOM_RUPTURE, LIMBUS_RUPTURE]
+  sinking:
+    name: "Sinking"
+    color: "&#4F46E5"
+    stats: [SINKING, CUSTOM_SINKING, LIMBUS_SINKING]
+  poise:
+    name: "Poise"
+    color: "&#A3E635"
+    stats: [POISE, CUSTOM_POISE, LIMBUS_POISE]
+  charge:
+    name: "Charge"
+    color: "&#22D3EE"
+    stats: [CHARGE, CUSTOM_CHARGE, LIMBUS_CHARGE]
+    # Charge tối đa 20 trong Limbus.
+    format: "{color}{name} {value}&7/20"
