@@ -1,0 +1,46 @@
+name: Build LimbusStatusHook
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: "21"
+          distribution: temurin
+          cache: maven
+          cache-dependency-path: LimbusStatusHook/pom.xml
+
+      - name: Verify project structure
+        run: |
+          echo "Repository root:"
+          ls -la
+          echo "LimbusStatusHook project:"
+          ls -la LimbusStatusHook
+          test -f LimbusStatusHook/pom.xml
+
+      - name: Build with Maven
+        working-directory: ./LimbusStatusHook
+        run: mvn -B clean package
+
+      - name: Find generated JAR
+        run: |
+          echo "Generated JAR files:"
+          find LimbusStatusHook/target -maxdepth 1 -type f -name "*.jar" -print
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: LimbusStatusHook
+          path: LimbusStatusHook/target/*.jar
+          if-no-files-found: error
