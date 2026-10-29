@@ -1,0 +1,59 @@
+# Công thức: {STAT}, số, + - * /, ngoặc (). Sửa xong: /obc reload.
+stats:
+  timezone: Asia/Ho_Chi_Minh
+lucchien: '{ATTACK_DAMAGE}*2+{MAX_HEALTH}'
+
+# Chỉ hiển thị: máu thật/tổng máu có modifier; giáp DEFENSE từ MMOItems/MythicLib.
+# DEFENSE là chỉ số giảm sát thương, không phải giáp hiện tại/tối đa tự hồi.
+# Khi thiếu MMOItems/MythicLib hoặc chưa có dữ liệu: dùng thuộc tính ARMOR vanilla.
+actionbar:
+  enabled: true
+  separator: " &7| "
+  sections:
+    health: true
+    armor: true
+    limbus: true   # Keyword Status Effects (plugin LimbusStatusHook)
+  labels:
+    health: "MÁU"
+    armor: "GIÁP"
+  # Keyword Status Effects của Limbus Company (cần plugin LimbusStatusHook).
+  # Giá trị lấy từ stat MythicLib/MMOItems của người chơi; status = 0 thì ẩn.
+  #   name/color : tên và màu hiển thị (&a hoặc hex &#RRGGBB)
+  #   stats      : ID stat thử lần lượt, lấy ID đầu tiên khác 0 (sửa cho khớp stat bạn đã tạo)
+  #   format     : biến {color} {name} {value}; mỗi status có thể ghi đè riêng
+  #   enabled    : false = không hiện status đó
+  # Đổi update-ticks cần /limbusstatus reload; các mục khác chỉ cần /obc reload. Xem ID stat: /limbusstatus stats
+  limbus:
+    update-ticks: 10
+    hide-zero: true
+    format: "{color}{name} {value}"
+    effects:
+      burn:
+        name: "Burn"
+        color: "&#F97316"
+        stats: [BURN, CUSTOM_BURN, LIMBUS_BURN]
+      bleed:
+        name: "Bleed"
+        color: "&#DC2626"
+        stats: [BLEED, CUSTOM_BLEED, LIMBUS_BLEED]
+      tremor:
+        name: "Tremor"
+        color: "&#EAB308"
+        stats: [TREMOR, CUSTOM_TREMOR, LIMBUS_TREMOR]
+      rupture:
+        name: "Rupture"
+        color: "&#3B82F6"
+        stats: [RUPTURE, CUSTOM_RUPTURE, LIMBUS_RUPTURE]
+      sinking:
+        name: "Sinking"
+        color: "&#4F46E5"
+        stats: [SINKING, CUSTOM_SINKING, LIMBUS_SINKING]
+      poise:
+        name: "Poise"
+        color: "&#A3E635"
+        stats: [POISE, CUSTOM_POISE, LIMBUS_POISE]
+      charge:
+        name: "Charge"
+        color: "&#22D3EE"
+        stats: [CHARGE, CUSTOM_CHARGE, LIMBUS_CHARGE]
+        format: "{color}{name} {value}&7/20"
