@@ -1,0 +1,16 @@
+name: LimbusStatusHook
+version: ${project.version}
+main: com.luckyvn.limbusstatus.LimbusStatusHook
+api-version: '1.21'
+description: Hook MMOItems + MythicLib, cung cấp PlaceholderAPI cho Keyword Status Effects của Limbus Company.
+depend: [MythicLib, MMOItems, PlaceholderAPI]
+commands:
+  limbusstatus:
+    description: Lệnh quản trị LimbusStatusHook.
+    usage: /limbusstatus <reload|check|stats> [player]
+    aliases: [lstatus, lbs]
+    permission: limbusstatus.admin
+permissions:
+  limbusstatus.admin:
+    description: Dùng lệnh /limbusstatus.
+    default: op

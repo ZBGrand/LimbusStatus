@@ -1,0 +1,63 @@
+# LimbusStatusHook - Keyword Status Effects (Limbus Company) qua PlaceholderAPI.
+# Sửa xong dùng: /limbusstatus reload
+#
+# Giá trị lấy từ stat của người chơi trong MythicLib (nơi MMOItems đẩy stat trang bị vào).
+#
+# ===== PLACEHOLDER (identifier: limbus) =====
+#   %limbus_<id>%          giá trị (số nguyên nếu tròn, vd 3 hoặc 2.5), 0 nếu không có
+#   %limbus_<id>_int%      giá trị làm tròn thành số nguyên
+#   %limbus_<id>_name%     tên hiển thị
+#   %limbus_<id>_color%    mã màu
+#   %limbus_<id>_display%  chuỗi đã định dạng theo format, RỖNG nếu giá trị = 0 (hide-zero)
+#   %limbus_<id>_active%   true / false
+#   %limbus_all%           mọi status đang có, nối bằng separator
+#   %limbus_count%         số status đang có
+#   %limbus_stat_<STAT>%   giá trị bất kỳ stat MythicLib (vd %limbus_stat_DEFENSE%)
+# <id> là khoá bên dưới: burn, bleed, tremor, rupture, sinking, poise, charge.
+
+placeholders:
+  # true = %limbus_<id>_display% và %limbus_all% bỏ qua status bằng 0.
+  hide-zero: true
+  separator: " &7| "
+  # Biến: {color} {name} {value}
+  format: "{color}{name} {value}"
+  # Dùng khi %limbus_all% không có status nào (để trống = không hiện gì).
+  empty: ""
+
+# name/color : tên và màu (&a hoặc hex &#RRGGBB)
+# stats      : ID stat thử lần lượt, lấy ID đầu tiên có giá trị khác 0.
+#              Sửa cho khớp stat bạn đã tạo (vd CUSTOM_BURN trong MMOItems custom-stats.yml).
+#              Dùng /limbusstatus stats để xem ID stat thật.
+# format     : (tuỳ chọn) ghi đè format cho riêng status này.
+# enabled    : (tuỳ chọn) false = bỏ status này.
+status-effects:
+  burn:
+    name: "Burn"
+    color: "&#F97316"
+    stats: [BURN, CUSTOM_BURN, LIMBUS_BURN]
+  bleed:
+    name: "Bleed"
+    color: "&#DC2626"
+    stats: [BLEED, CUSTOM_BLEED, LIMBUS_BLEED]
+  tremor:
+    name: "Tremor"
+    color: "&#EAB308"
+    stats: [TREMOR, CUSTOM_TREMOR, LIMBUS_TREMOR]
+  rupture:
+    name: "Rupture"
+    color: "&#3B82F6"
+    stats: [RUPTURE, CUSTOM_RUPTURE, LIMBUS_RUPTURE]
+  sinking:
+    name: "Sinking"
+    color: "&#4F46E5"
+    stats: [SINKING, CUSTOM_SINKING, LIMBUS_SINKING]
+  poise:
+    name: "Poise"
+    color: "&#A3E635"
+    stats: [POISE, CUSTOM_POISE, LIMBUS_POISE]
+  charge:
+    name: "Charge"
+    color: "&#22D3EE"
+    stats: [CHARGE, CUSTOM_CHARGE, LIMBUS_CHARGE]
+    # Charge tối đa 20 trong Limbus.
+    format: "{color}{name} {value}&7/20"
